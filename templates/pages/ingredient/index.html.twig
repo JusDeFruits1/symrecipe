@@ -32,6 +32,12 @@
                         <th scope="col">
                             Date de création
                         </th>
+                        <th scope="col">
+                            Edition
+                        </th>
+                        <th scope="col">
+                            Suppression
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -49,6 +55,19 @@
                             <td>
                                 {{ ingredient.createdAt|date('d/m/Y') }}
                             </td>
+                            <td>
+                                <a href="{{ path('ingredient_edit', {id: ingredient.id}) }}">
+                                    <button class="btn btn-info">
+                                        Modifier
+                                    </button>
+                                </a>
+                            </td>
+                            <td>
+                                <form action="{{ path('ingredient_remove', {id: ingredient.id}) }}">                                    
+                                    <button class="btn btn-warning">
+                                        Supprimer
+                                    </button>
+                                </form>
                         </tr>
                     {% endfor %}
                 </tbody>
