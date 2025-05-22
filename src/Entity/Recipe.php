@@ -24,7 +24,7 @@ class Recipe
 
     #[ORM\Column(nullable: true)]
     #[Assert\Positive()]
-    #[Assert\LessThan(120)]
+    #[Assert\LessThan(1440)]
     private ?int $time = null;
 
     #[ORM\Column(nullable: true)]
@@ -42,7 +42,7 @@ class Recipe
 
     #[ORM\Column(nullable: true)]
     #[Assert\Positive()]
-    #[Assert\LessThan(200)]
+    #[Assert\LessThan(1000)]
     private ?float $price = null;
 
     #[ORM\Column]

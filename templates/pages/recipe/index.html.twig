@@ -14,6 +14,10 @@
 		{% if not recipes.items is same as([]) %}
 			<h1>Mes recettes</h1>
 
+			<a href="{{ path('recipe.new') }}" class="btn btn-primary">
+				Créer une recette
+			</a>
+
 			<div class="count mt-4">Il y a
 				{{ recipes.getTotalItemCount }}
 				recette(s)
@@ -27,7 +31,8 @@
 						<th scope="col">Prix</th>
 						<th scope="col">Difficulté</th>
 						<th scope="col">Date de création</th>
-						
+						<th scope="col">Edition</th>
+						<th scope="col">Suppresion</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -50,7 +55,13 @@
 									{{ recipe.difficulty }}
 								{% endif %}
 							</td>
-							<td>{{ recipe.createdAt|date('d/m/Y') }}</td>							
+							<td>{{ recipe.createdAt|date('d/m/Y') }}</td>
+							{# <td>
+								<a href="{{ path('recipe.edit', { id: recipe.id }) }}" class="btn btn-info">Modifier</a>
+							</td>
+							<td>
+								<a href="{{ path('recipe.delete', { id: recipe.id }) }}" class="btn btn-warning">Supprimer</a>
+							</td> #}
 						</tr>
 					{% endfor %}
 				</tbody>
@@ -61,6 +72,10 @@
 			</div>
 		{% else %}
 			<h4>Il n'y a pas de recettes</h4>
+
+			{# <a href="{{ path('recipe.new') }}" class="btn btn-primary">
+				Créer une recette
+			</a> #}
 		{% endif %}
 	</div>
 {% endblock %}
