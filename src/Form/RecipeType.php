@@ -19,7 +19,6 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class RecipeType extends AbstractType
@@ -89,9 +88,7 @@ class RecipeType extends AbstractType
                 'label_attr' => [
                     'class' => 'form-label mt-4'
                 ],
-                'constraints' => [
-                    new Assert\NotBlank()
-                ]
+                
             ])
             ->add('price', MoneyType::class, [
                 'attr' => [
@@ -116,7 +113,11 @@ class RecipeType extends AbstractType
                 
             ])           
             ->add('ingredients', EntityType::class, [
-                'class' => Ingredient::class,                
+                'class' => Ingredient::class,   
+                'query_builder' => function (IngredientRepository $repo) {
+                    return $repo->createQueryBuilder('i')
+                        ->orderBy('i.name', 'ASC');
+                },             
                 'label' => 'Ingrédients',
                 'label_attr' => [
                     'class' => 'form-label mt-4'
